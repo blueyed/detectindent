@@ -137,6 +137,11 @@ fun! <SID>DetectIndent()
         setl expandtab
         let &l:shiftwidth  = l:shortest_leading_spaces_run
         let &l:softtabstop = l:shortest_leading_spaces_run
+
+        if exists("g:detectindent_min_indent")
+            let &l:shiftwidth = max([g:detectindent_min_indent, &l:shiftwidth])
+            let &l:softtabstop = max([g:detectindent_min_indent, &l:softtabstop])
+        endif
     else
         let l:verbose_msg = "Cannot determine indent. Use default to indent."
         if exists("g:detectindent_preferred_indent") &&
