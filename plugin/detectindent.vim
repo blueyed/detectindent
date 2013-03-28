@@ -152,7 +152,12 @@ fun! <SID>DetectIndent()
         elseif l:longest_leading_spaces_run <= 4
             let &l:tabstop = 4
         else
-            let &l:tabstop = 8
+            if exists("g:detectindent_preferred_tabstop")
+                let &l:tabstop = g:detectindent_preferred_tabstop
+            else
+                let &l:tabstop = 8
+            endif
+            
         endif
 
     else
