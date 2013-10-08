@@ -29,7 +29,7 @@ if !exists('g:detectindent_verbosity')
 endif
 
 fun! <SID>HasCStyleComments()
-    return index(["c", "cpp", "java", "javascript", "php"], &ft) != -1
+    return index(["c", "cpp", "java", "javascript", "php", "arduino"], &ft) != -1
 endfun
 
 fun! <SID>IsCommentStart(line)
@@ -176,7 +176,7 @@ fun! <SID>DetectIndent()
     endif
 
     if &verbose >= g:detectindent_verbosity
-        echo l:verbose_msg
+        echom l:verbose_msg
                     \ ."; has_leading_tabs:" l:has_leading_tabs
                     \ .", has_leading_spaces:" l:has_leading_spaces
                     \ .", shortest_leading_spaces_run:" l:shortest_leading_spaces_run
@@ -191,10 +191,15 @@ fun! <SID>DetectIndent()
           end
         endfor
         if len(changed_msg)
-          echo "Initial buffer settings changed:" join(changed_msg, ", ")
+          echom "Initial buffer settings changed:" join(changed_msg, ", ")
         endif
     endif
 endfun
 
 command! -bar -nargs=0 DetectIndent call <SID>DetectIndent()
 
+if exists("g:detectindent_autodetect")
+    augroup detectindent
+        autocmd BufReadPost * call <SID>DetectIndent()
+    augroup END
+endif
