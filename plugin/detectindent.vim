@@ -142,6 +142,24 @@ fun! <SID>DetectIndent()
             let &l:shiftwidth = max([g:detectindent_min_indent, &l:shiftwidth])
             let &l:softtabstop = max([g:detectindent_min_indent, &l:softtabstop])
         endif
+    elseif l:has_leading_spaces && l:has_leading_tabs
+        " spaces and tabs
+        let l:verbose_msg = "Detected spaces and tabs"
+        setl noexpandtab
+        let &l:shiftwidth = l:shortest_leading_spaces_run
+
+        " mmmm, time to guess how big tabs are
+        if l:longest_leading_spaces_run <= 2
+            let &l:tabstop = 2
+        elseif l:longest_leading_spaces_run <= 4
+            let &l:tabstop = 4
+        else
+            if exists("g:detectindent_preferred_tabstop")
+                let &l:tabstop = g:detectindent_preferred_tabstop
+            else
+                let &l:tabstop = 8
+            endif
+        endif
     else
         let l:verbose_msg = "Cannot determine indent. Use default to indent."
         if exists("g:detectindent_preferred_indent") &&
