@@ -71,9 +71,10 @@ fun! <SID>DetectIndent()
     endif
 
     let verbose_msg = ''
-    if ! exists("b:detectindent_cursettings")
+    if !exists("b:detectindent_cursettings")
       " remember initial values for comparison
-      let b:detectindent_cursettings = {'expandtab': &et, 'shiftwidth': &sw, 'tabstop': &ts, 'softtabstop': &sts}
+      let b:detectindent_cursettings =
+          \ {'expandtab': &et, 'shiftwidth': &sw, 'tabstop': &ts, 'softtabstop': &sts}
     endif
 
     let l:idx_end = line("$")
@@ -84,7 +85,7 @@ fun! <SID>DetectIndent()
         " try to skip over comment blocks, they can give really screwy indent
         " settings in c/c++ files especially
         if <SID>IsCommentStart(l:line)
-            while l:idx <= l:idx_end && ! <SID>IsCommentEnd(l:line)
+            while l:idx <= l:idx_end && !<SID>IsCommentEnd(l:line)
                 let l:idx = l:idx + 1
                 let l:line = getline(l:idx)
             endwhile
@@ -116,7 +117,8 @@ fun! <SID>DetectIndent()
             if -1 == match(l:line, '^ \+\t')
                 let l:leading_space_count = l:leading_space_count + 1
                 let l:spaces = strlen(matchstr(l:line, '^ \+'))
-		let l:leading_space_dict[l:spaces] = get(l:leading_space_dict, l:spaces) + 1
+                let l:leading_space_dict[l:spaces] =
+                    \ get(l:leading_space_dict, l:spaces) + 1
             endif
 
         endif
@@ -128,18 +130,17 @@ fun! <SID>DetectIndent()
         if l:max_lines == 0
             let l:idx = l:idx_end + 1
         endif
-
     endwhile
 
-    if l:leading_tab_count > l:leading_space_count
-        let l:verbose_msg = "Use tab to indent."
+    if l:leading_tab_count > 0 && l:leading_space_count == 0
+        let l:verbose_msg = "Using tabs to indent."
         setl noexpandtab
         if exists("g:detectindent_preferred_indent")
             let &l:shiftwidth  = g:detectindent_preferred_indent
             let &l:tabstop     = g:detectindent_preferred_indent
         endif
 
-    elseif l:leading_space_count > l:leading_tab_count
+    elseif l:leading_space_count > 0
         " Filter out those tab stops which occurred in < 10% of the lines
         call filter(l:leading_space_dict, '100*v:val/l:leading_space_count >= 10')
 
@@ -154,7 +155,7 @@ fun! <SID>DetectIndent()
         endfor
 
         if l:leading_spaces_gcd != 0
-            let l:verbose_msg = "Use space to indent."
+            let l:verbose_msg = "Using spaces to indent."
             setl expandtab
             let &l:shiftwidth  = l:leading_spaces_gcd
             let &l:softtabstop = l:leading_spaces_gcd
@@ -166,30 +167,10 @@ fun! <SID>DetectIndent()
             let &l:softtabstop = max([g:detectindent_min_indent, &l:softtabstop])
             let &l:tabstop = max([g:detectindent_min_indent, &l:tabstop])
         endif
-    elseif l:leading_space_count > 0 && l:leading_tab_count > 0
-        " spaces and tabs
-        let l:verbose_msg = "Detected spaces and tabs"
-        setl noexpandtab
-        let &l:shiftwidth = l:shortest_leading_spaces_run
-
-        " mmmm, time to guess how big tabs are
-        if l:longest_leading_spaces_run <= 2
-            let &l:tabstop = 2
-        elseif l:longest_leading_spaces_run <= 3
-            let &l:tabstop = 3
-        elseif l:longest_leading_spaces_run <= 4
-            let &l:tabstop = 4
-        else
-            if exists("g:detectindent_preferred_tabstop")
-                let &l:tabstop = g:detectindent_preferred_tabstop
-            else
-                let &l:tabstop = 8
-            endif
-        endif
     else
         let l:verbose_msg = "Cannot determine indent. Use default to indent."
         if exists("g:detectindent_preferred_indent") &&
-                    \ exists("g:detectindent_preferred_expandtab")
+            \ exists("g:detectindent_preferred_expandtab")
             setl expandtab
             let &l:shiftwidth  = g:detectindent_preferred_indent
             let &l:softtabstop = g:detectindent_preferred_indent
@@ -210,6 +191,7 @@ fun! <SID>DetectIndent()
                     \ ."; leading_tab_count:" l:leading_tab_count
                     \ .", leading_space_count:" l:leading_space_count
                     \ .", leading_spaces_gcd:" l:leading_spaces_gcd
+                    \ .", leading_space_dict:" string(l:leading_space_dict)
 
         let changed_msg = []
         for [setting, oldval] in items(b:detectindent_cursettings)
