@@ -141,8 +141,10 @@ fun! <SID>DetectIndent()
         endif
 
     elseif l:leading_space_count > 0
+        " I think absolutely no one uses 1 space indents
+        call filter(l:leading_space_dict, 'v:key > 1')
         " Filter out those tab stops which occurred in < 10% of the lines
-        call filter(l:leading_space_dict, '100*v:val/l:leading_space_count >= 10')
+        call filter(l:leading_space_dict, '100.0 * v:val / l:leading_space_count >= 10.0')
 
         " Find the greatest common divisor of the remaining tab stop lengths
         let l:leading_spaces_gcd = 0
