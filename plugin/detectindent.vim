@@ -169,6 +169,11 @@ fun! <SID>DetectIndent()
             let &l:softtabstop = max([g:detectindent_min_indent, &l:softtabstop])
             let &l:tabstop = max([g:detectindent_min_indent, &l:tabstop])
         endif
+        if exists("g:detectindent_max_indent")
+            let &l:shiftwidth = min([g:detectindent_max_indent, &l:shiftwidth])
+            let &l:softtabstop = min([g:detectindent_max_indent, &l:softtabstop])
+            let &l:tabstop = min([g:detectindent_max_indent, &l:tabstop])
+        endif
     else
         let l:verbose_msg = "Cannot determine indent. Use default to indent."
         if exists("g:detectindent_preferred_indent") &&
