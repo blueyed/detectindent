@@ -19,7 +19,12 @@
 "
 "                " see doc/detectindent.txt for more options
 "
-" Requirements:  Untested on Vim versions below 6.2
+" Requirements:  Does not work on Vim versions below 7.0
+
+" Bail out if we're on an old version of vim
+if version < 700
+    finish
+endif
 
 if exists("loaded_detectindent")
     finish
