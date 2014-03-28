@@ -79,7 +79,7 @@ fun! <SID>DetectIndent()
 
     let l:idx_end = line("$")
     let l:idx = 1
-    while l:idx <= l:idx_end
+    while l:idx <= l:idx_end && l:idx <= l:max_lines
         let l:line = getline(l:idx)
 
         " try to skip over comment blocks, they can give really screwy indent
@@ -125,11 +125,6 @@ fun! <SID>DetectIndent()
 
         let l:idx = l:idx + 1
 
-        let l:max_lines = l:max_lines - 1
-
-        if l:max_lines == 0
-            let l:idx = l:idx_end + 1
-        endif
     endwhile
 
     if l:leading_tab_count > 0 && l:leading_space_count == 0
