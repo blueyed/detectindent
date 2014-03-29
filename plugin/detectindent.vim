@@ -29,11 +29,13 @@ if !exists('g:detectindent_verbosity')
 endif
 
 fun! <SID>HasCStyleComments()
-    return index(["c", "cpp", "h", "java", "javascript", "php", "arduino"], &ft) != -1
+    let l:c_style_comment_filetypes = ["arduino", "c", "cpp", "h", "java", "javascript", "php"]
+    return index(l:c_style_comment_filetypes, &ft) != -1
 endfun
 
 fun! <SID>HasHTMLStyleComments()
-    return index(["html", "xml"], &ft) != -1
+    let l:html_style_comment_filetypes = ["html", "xml"]
+    return index(l:html_style_comment_filetypes, &ft) != -1
 endfun
 
 fun! <SID>IsCommentStart(line)
