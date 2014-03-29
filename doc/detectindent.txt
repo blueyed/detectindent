@@ -38,6 +38,10 @@ Author:  Ciaran McCreesh <ciaran.mccreesh at googlemail.com>
 		:let g:detectindent_min_indent = 2
 <	in your |vimrc| file.
 
+	To set an upper bound for the detected indent value: >
+		:let g:detectindent_max_indent = 8
+<	in your |vimrc| file.
+
 ==============================================================================
 3. DetectIndent ChangeLog			      *detectindent-changelog*
 
