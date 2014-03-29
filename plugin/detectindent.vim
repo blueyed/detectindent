@@ -17,6 +17,8 @@
 "                " impossible:
 "                :let g:detectindent_preferred_indent = 4
 "
+"                " see doc/detectindent.txt for more options
+"
 " Requirements:  Untested on Vim versions below 6.2
 
 if exists("loaded_detectindent")
