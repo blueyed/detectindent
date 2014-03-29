@@ -10,6 +10,7 @@ This was done in less than 15 minutes, so expect bugs!
 
 My fork’s additions:
 
+* to make it easier for users to manually change indentation, set 0 for `shiftwidth` and -1 for `softtabstop` when supported
 * treat a `g:detectindent_preferred_expandtab` 0 value as signifying a desired default of `noexpandtab`
 * slightly better wording of verbose log messages
 * various refactoring

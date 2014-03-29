@@ -62,9 +62,30 @@ fun! <SID>GCD(x, y)
     return l:a
 endfun
 
+fun! <SID>CanSetZeroShiftwidth()
+    " feature was introduced in patch 7.3.629, so check for Vim 7.4 or later
+    return v:version >= 704
+endfun
+
+fun! <SID>CanSetNegativeSofttabstop()
+    " feature was introduced in patch 7.3.693, so check for Vim 7.4 or later
+    return v:version >= 704
+endfun
+
 fun! <SID>SetLocalIndentWidth(num_spaces)
-    let &l:shiftwidth = a:num_spaces
-    let &l:softtabstop = a:num_spaces
+    " when supported, use values that automatically sync with each other
+    " so that the user doesn't have to change multiple options if they
+    " manually change the value of tabstop
+    if <SID>CanSetZeroShiftwidth()
+        let &l:shiftwidth = 0
+    else
+        let &l:shiftwidth = a:num_spaces
+    endif
+    if <SID>CanSetNegativeSofttabstop()
+        let &l:softtabstop = -1
+    else
+        let &l:softtabstop = a:num_spaces
+    endif
     let &l:tabstop = a:num_spaces
 endfun
 
