@@ -23,7 +23,9 @@ Author:  Ciaran McCreesh <ciaran.mccreesh at googlemail.com>
 	usually retain its existing value. To specify that 'expandtab' should
 	be used where autodetection is impossible, set: >
 		:let g:detectindent_preferred_expandtab = 1
-<	in your |vimrc| file.
+<	in your |vimrc| file. A nonzero value signifies that 'expandtab'
+	should be used when unsure, and a value of zero reaffirms the
+	default, that 'noexpandtab' should be used.
 
 	To set a preferred value for 'shiftwidth' and 'tabstop' when they
 	cannot be automatically detected, set: >

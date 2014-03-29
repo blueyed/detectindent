@@ -172,7 +172,8 @@ fun! <SID>DetectIndent()
     else
         let l:verbose_msg = "Cannot determine indent. Use default to indent."
         if exists("g:detectindent_preferred_indent") &&
-            \ exists("g:detectindent_preferred_expandtab")
+            \ exists("g:detectindent_preferred_expandtab") &&
+            \ g:detectindent_preferred_expandtab
             setl expandtab
             let &l:shiftwidth  = g:detectindent_preferred_indent
             let &l:softtabstop = g:detectindent_preferred_indent
@@ -180,7 +181,8 @@ fun! <SID>DetectIndent()
             setl noexpandtab
             let &l:shiftwidth  = g:detectindent_preferred_indent
             let &l:tabstop     = g:detectindent_preferred_indent
-        elseif exists("g:detectindent_preferred_expandtab")
+        elseif exists("g:detectindent_preferred_expandtab") &&
+            \ g:detectindent_preferred_expandtab
             setl expandtab
         else
             setl noexpandtab
