@@ -67,14 +67,14 @@ fun! <SID>DetectIndent()
     let l:leading_spaces_gcd          = 0
     let l:max_lines                   = 1024
     if exists("g:detectindent_max_lines_to_analyse")
-      let l:max_lines = g:detectindent_max_lines_to_analyse
+        let l:max_lines = g:detectindent_max_lines_to_analyse
     endif
 
     let verbose_msg = ''
     if !exists("b:detectindent_cursettings")
-      " remember initial values for comparison
-      let b:detectindent_cursettings =
-          \ {'expandtab': &et, 'shiftwidth': &sw, 'tabstop': &ts, 'softtabstop': &sts}
+        " remember initial values for comparison
+        let b:detectindent_cursettings =
+            \ {'expandtab': &et, 'shiftwidth': &sw, 'tabstop': &ts, 'softtabstop': &sts}
     endif
 
     let l:idx_end = line("$")
@@ -190,20 +190,20 @@ fun! <SID>DetectIndent()
 
     if &verbose >= g:detectindent_verbosity
         echom l:verbose_msg
-                    \ ."; leading_tab_count:" l:leading_tab_count
-                    \ .", leading_space_count:" l:leading_space_count
-                    \ .", leading_spaces_gcd:" l:leading_spaces_gcd
-                    \ .", leading_space_dict:" string(l:leading_space_dict)
+            \ ."; leading_tab_count:" l:leading_tab_count
+            \ .", leading_space_count:" l:leading_space_count
+            \ .", leading_spaces_gcd:" l:leading_spaces_gcd
+            \ .", leading_space_dict:" string(l:leading_space_dict)
 
         let changed_msg = []
         for [setting, oldval] in items(b:detectindent_cursettings)
-          exec 'let newval = &'.setting
-          if oldval != newval
-            let changed_msg += [ setting." changed from ".oldval." to ".newval ]
-          end
+            exec 'let newval = &'.setting
+            if oldval != newval
+                let changed_msg += [ setting." changed from ".oldval." to ".newval ]
+            end
         endfor
         if len(changed_msg)
-          echom "Initial buffer settings changed:" join(changed_msg, ", ")
+            echom "Initial buffer settings changed:" join(changed_msg, ", ")
         endif
     endif
 endfun
