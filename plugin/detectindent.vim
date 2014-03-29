@@ -62,6 +62,12 @@ fun! <SID>GCD(x, y)
     return l:a
 endfun
 
+fun! <SID>SetLocalIndentWidth(num_spaces)
+    let &l:shiftwidth = a:num_spaces
+    let &l:softtabstop = a:num_spaces
+    let &l:tabstop = a:num_spaces
+endfun
+
 fun! <SID>DetectIndent()
     let l:leading_tab_count           = 0
     let l:leading_space_count         = 0
@@ -133,8 +139,7 @@ fun! <SID>DetectIndent()
         let l:verbose_msg = "Using tabs to indent."
         setl noexpandtab
         if exists("g:detectindent_preferred_indent")
-            let &l:shiftwidth  = g:detectindent_preferred_indent
-            let &l:tabstop     = g:detectindent_preferred_indent
+            call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
         endif
 
     elseif l:leading_space_count > 0
@@ -156,20 +161,14 @@ fun! <SID>DetectIndent()
         if l:leading_spaces_gcd != 0
             let l:verbose_msg = "Using spaces to indent."
             setl expandtab
-            let &l:shiftwidth  = l:leading_spaces_gcd
-            let &l:softtabstop = l:leading_spaces_gcd
-            let &l:tabstop = l:leading_spaces_gcd
+            call <SID>SetLocalIndentWidth(l:leading_spaces_gcd)
         endif
 
         if exists("g:detectindent_min_indent")
-            let &l:shiftwidth = max([g:detectindent_min_indent, &l:shiftwidth])
-            let &l:softtabstop = max([g:detectindent_min_indent, &l:softtabstop])
-            let &l:tabstop = max([g:detectindent_min_indent, &l:tabstop])
+            call <SID>SetLocalIndentWidth(max([g:detectindent_min_indent, &l:shiftwidth]))
         endif
         if exists("g:detectindent_max_indent")
-            let &l:shiftwidth = min([g:detectindent_max_indent, &l:shiftwidth])
-            let &l:softtabstop = min([g:detectindent_max_indent, &l:softtabstop])
-            let &l:tabstop = min([g:detectindent_max_indent, &l:tabstop])
+            call <SID>SetLocalIndentWidth(min([g:detectindent_max_indent, &l:shiftwidth]))
         endif
     else
         let l:verbose_msg = "Cannot determine indent. Use default to indent."
@@ -177,12 +176,10 @@ fun! <SID>DetectIndent()
             \ exists("g:detectindent_preferred_expandtab") &&
             \ g:detectindent_preferred_expandtab
             setl expandtab
-            let &l:shiftwidth  = g:detectindent_preferred_indent
-            let &l:softtabstop = g:detectindent_preferred_indent
+            call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
         elseif exists("g:detectindent_preferred_indent")
             setl noexpandtab
-            let &l:shiftwidth  = g:detectindent_preferred_indent
-            let &l:tabstop     = g:detectindent_preferred_indent
+            call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
         elseif exists("g:detectindent_preferred_expandtab") &&
             \ g:detectindent_preferred_expandtab
             setl expandtab
