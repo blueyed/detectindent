@@ -8,9 +8,9 @@ Vim script for automatically detecting indent settings
 > I merged all the forks that I found were semi-reasonable in the GitHub network graph.
 This was done in less than 15 minutes, so expect bugs!
 
-My fork’s changes:
+My fork’s additions:
 
-* various refactoring
-* code style fixes
 * treat a `g:detectindent_preferred_expandtab` 0 value as signifying a desired default of `noexpandtab`
 * slightly better wording of verbose log messages
+* various refactoring
+* code style fixes
