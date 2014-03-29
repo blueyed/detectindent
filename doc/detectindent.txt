@@ -28,7 +28,7 @@ Author:  Ciaran McCreesh <ciaran.mccreesh at googlemail.com>
 	To set a preferred value for 'shiftwidth' and 'tabstop' when they
 	cannot be automatically detected, set: >
 		:let g:detectindent_preferred_indent = 4
-<       in your |vimrc| file.
+<	in your |vimrc| file.
 
 	To set limit for number of lines that will be analysed set: >
 		:let g:detectindent_max_lines_to_analyse = 1024
