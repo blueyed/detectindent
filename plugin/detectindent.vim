@@ -194,7 +194,7 @@ fun! <SID>DetectIndent()
 
     if &verbose >= g:detectindent_verbosity
         echom l:verbose_msg
-            \ ."; leading_tab_count:" l:leading_tab_count
+            \ ."  leading_tab_count:" l:leading_tab_count
             \ .", leading_space_count:" l:leading_space_count
             \ .", leading_spaces_gcd:" l:leading_spaces_gcd
             \ .", leading_space_dict:" string(l:leading_space_dict)

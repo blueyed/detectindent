@@ -13,3 +13,4 @@ My fork’s changes:
 * various refactoring
 * code style fixes
 * treat a `g:detectindent_preferred_expandtab` 0 value as signifying a desired default of `noexpandtab`
+* slightly better wording of verbose log messages
