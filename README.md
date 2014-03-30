@@ -14,4 +14,6 @@ My fork’s additions:
 * treat a `g:detectindent_preferred_expandtab` 0 value as signifying a desired default of `noexpandtab`
 * slightly better wording of verbose log messages
 * various refactorings
-* code style fixes
+* style and formatting fixes in code and documentation
+
+Feel free to submit [pull requests](https://github.com/roryokane/detectindent/pulls) or file [issues](https://github.com/roryokane/detectindent/issues).
