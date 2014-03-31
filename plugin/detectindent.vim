@@ -19,7 +19,8 @@
 "
 "                " see doc/detectindent.txt for more options
 "
-" Requirements:  Does not work on Vim versions below 7.0
+" Requirements:  Minimum Vim version is at least 7.0, because the code uses
+"                dictionaries and +=
 
 " Bail out if we're on an old version of vim
 if version < 700
@@ -154,7 +155,7 @@ fun! <SID>DetectIndent()
 
         endif
 
-        let l:idx = l:idx + 1
+        let l:idx += 1
 
     endwhile
 
