@@ -118,36 +118,36 @@ fun! <SID>DetectIndent()
         " settings in c/c++ files especially
         if <SID>IsCommentStart(l:line)
             while l:idx <= l:idx_end && !<SID>IsCommentEnd(l:line)
-                let l:idx = l:idx + 1
+                let l:idx += 1
                 let l:line = getline(l:idx)
             endwhile
-            let l:idx = l:idx + 1
+            let l:idx += 1
             continue
         endif
 
         " Skip comment lines since they are not dependable.
         if <SID>IsCommentLine(l:line)
-            let l:idx = l:idx + 1
+            let l:idx += 1
             continue
         endif
 
         " Skip lines that are solely whitespace, since they're less likely to
         " be properly constructed.
         if l:line !~ '\S'
-            let l:idx = l:idx + 1
+            let l:idx += 1
             continue
         endif
 
         let l:leading_char = strpart(l:line, 0, 1)
 
         if l:leading_char == "\t"
-            let l:leading_tab_count = l:leading_tab_count + 1
+            let l:leading_tab_count += 1
 
         elseif l:leading_char == " "
             " only interested if we don't have a run of spaces followed by a
             " tab.
             if -1 == match(l:line, '^ \+\t')
-                let l:leading_space_count = l:leading_space_count + 1
+                let l:leading_space_count += 1
                 let l:spaces = strlen(matchstr(l:line, '^ \+'))
                 let l:leading_space_dict[l:spaces] =
                     \ get(l:leading_space_dict, l:spaces) + 1
