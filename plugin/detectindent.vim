@@ -159,14 +159,14 @@ fun! <SID>DetectIndent()
 
     endwhile
 
-    if l:leading_tab_count > 0 && l:leading_space_count == 0
+    if l:leading_tab_count > l:leading_space_count
         let l:verbose_msg = "Using tabs to indent."
         setl noexpandtab
         if exists("g:detectindent_preferred_indent")
             call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
         endif
 
-    elseif l:leading_space_count > 0
+    elseif l:leading_space_count > l:leading_tab_count
         " I think absolutely no one uses 1 space indents
         call filter(l:leading_space_dict, 'v:key > 1')
         " Filter out those tab stops which occurred in < 10% of the lines
