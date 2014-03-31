@@ -161,7 +161,7 @@ fun! <SID>DetectIndent()
 
     if l:leading_tab_count > l:leading_space_count
         let l:verbose_msg = "Using tabs to indent."
-        setl noexpandtab
+        setlocal noexpandtab
         if exists("g:detectindent_preferred_indent")
             call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
         endif
@@ -184,7 +184,7 @@ fun! <SID>DetectIndent()
 
         if l:leading_spaces_gcd != 0
             let l:verbose_msg = "Using spaces to indent."
-            setl expandtab
+            setlocal expandtab
             call <SID>SetLocalIndentWidth(l:leading_spaces_gcd)
         endif
 
@@ -199,16 +199,16 @@ fun! <SID>DetectIndent()
         if exists("g:detectindent_preferred_indent") &&
             \ exists("g:detectindent_preferred_expandtab") &&
             \ g:detectindent_preferred_expandtab
-            setl expandtab
+            setlocal expandtab
             call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
         elseif exists("g:detectindent_preferred_indent")
-            setl noexpandtab
+            setlocal noexpandtab
             call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
         elseif exists("g:detectindent_preferred_expandtab") &&
             \ g:detectindent_preferred_expandtab
-            setl expandtab
+            setlocal expandtab
         else
-            setl noexpandtab
+            setlocal noexpandtab
         endif
 
     endif
