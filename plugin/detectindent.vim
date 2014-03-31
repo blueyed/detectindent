@@ -150,7 +150,7 @@ fun! <SID>DetectIndent()
                 let l:leading_space_count += 1
                 let l:spaces = strlen(matchstr(l:line, '^ \+'))
                 let l:leading_space_dict[l:spaces] =
-                    \ get(l:leading_space_dict, l:spaces) + 1
+                    \ get(l:leading_space_dict, l:spaces, 0) + 1
             endif
 
         endif
