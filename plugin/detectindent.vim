@@ -195,7 +195,7 @@ fun! <SID>DetectIndent()
             call <SID>SetLocalIndentWidth(min([g:detectindent_max_indent, &l:shiftwidth]))
         endif
     else
-        let l:verbose_msg = "Cannot determine indent. Use default to indent."
+        let l:verbose_msg = "Cannot determine indent. Using default to indent."
         if exists("g:detectindent_preferred_indent") &&
             \ exists("g:detectindent_preferred_expandtab") &&
             \ g:detectindent_preferred_expandtab
