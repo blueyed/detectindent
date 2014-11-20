@@ -19,6 +19,7 @@ Author:  Ciaran McCreesh <ciaran.mccreesh at googlemail.com>
 
     Settings                                           *detectindent-settings*
 
+                                          *g:detectindent_preferred_expandtab*
         When the correct value for 'expandtab' cannot be determined, it will
         usually retain its existing value. To specify that 'expandtab' should
         be used where autodetection is impossible, set: >
@@ -27,19 +28,23 @@ Author:  Ciaran McCreesh <ciaran.mccreesh at googlemail.com>
         should be used when unsure, and a value of zero reaffirms the
         default, that 'noexpandtab' should be used.
 
+                                             *g:detectindent_preferred_indent*
         To set a preferred value for 'shiftwidth' and 'tabstop' when they
         cannot be automatically detected, set: >
                 :let g:detectindent_preferred_indent = 4
 <        in your |vimrc| file.
 
+                                         *g:detectindent_max_lines_to_analyse*
         To set limit for number of lines that will be analysed set: >
                 :let g:detectindent_max_lines_to_analyse = 1024
 <        in your |vimrc| file.
 
+                                                   *g:detectindent_min_indent*
         To set a lower bound for the detected indent value: >
                 :let g:detectindent_min_indent = 2
 <        in your |vimrc| file.
 
+                                                   *g:detectindent_max_indent*
         To set an upper bound for the detected indent value: >
                 :let g:detectindent_max_indent = 8
 <        in your |vimrc| file.
