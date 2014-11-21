@@ -22,7 +22,7 @@
 " Requirements:  Minimum Vim version is at least 7.0, because the code uses
 "                dictionaries and +=
 
-" Bail out if we're on an old version of vim
+" Bail out if we're on an incompatible version of vim
 if version < 700
     finish
 endif
@@ -114,8 +114,8 @@ fun! <SID>DetectIndent()
     while l:idx <= l:idx_end && l:idx <= l:max_lines
         let l:line = getline(l:idx)
 
-        " try to skip over comment blocks, they can give really screwy indent
-        " settings in c/c++ files especially
+        " try to skip over comment blocks; they can give really screwy indent
+        " settings in C/C++ files especially
         if <SID>IsCommentStart(l:line)
             while l:idx <= l:idx_end && !<SID>IsCommentEnd(l:line)
                 let l:idx += 1
