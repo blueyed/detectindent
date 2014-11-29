@@ -6,6 +6,12 @@ After:
   " close the file that was just tested and its tab, and forget about it
   bdelete
 
+Execute (Coursera-The_Hardware-Software_Interface-lab1-bits.c):
+  tabnew tests/fixtures/Coursera-The_Hardware-Software_Interface-lab1-bits.c
+  DetectIndent
+  AssertEqual 1, &expandtab
+  AssertEqual 2, &tabstop
+
 Execute (FountainMusic-FMDisplayItem.c):
   tabnew tests/fixtures/FountainMusic-FMDisplayItem.c
   DetectIndent
