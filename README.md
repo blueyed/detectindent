@@ -37,6 +37,7 @@ With [Vundle](https://github.com/gmarik/Vundle.vim):
 My fork’s additions to Raymond’s fork:
 
 * a full README for GitHub, with a description and installation instructions
+* automated tests of the plugin
 * require only a majority, not an entirety, of lines to use tabs for tabs to be selected
 * set 0 for `shiftwidth` and -1 for `softtabstop` when Vim supports it, to make it easier for users to manually change indentation
 * treat a `g:detectindent_preferred_expandtab` option 0 value as signifying a desired default of `noexpandtab`

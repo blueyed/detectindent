@@ -1,0 +1,73 @@
+Execute (reset indent options to initial values):
+  " so it is clear what values later tests are working with
+  setglobal noexpandtab tabstop=8 softtabstop=0 shiftwidth=8
+
+After:
+  " close the file that was just tested and its tab, and forget about it
+  bdelete
+
+Execute (FountainMusic-FMDisplayItem.c):
+  tabnew tests/fixtures/FountainMusic-FMDisplayItem.c
+  DetectIndent
+  AssertEqual 0, &expandtab
+  AssertEqual 8, &tabstop
+
+Execute (FountainMusic-FMDisplayItem.h):
+  tabnew tests/fixtures/FountainMusic-FMDisplayItem.h
+  DetectIndent
+  AssertEqual 0, &expandtab
+  AssertEqual 8, &tabstop
+
+Execute (GameOfLife.plaid – badly mixed indentation):
+  tabnew tests/fixtures/GameOfLife.plaid
+  DetectIndent
+  AssertEqual 0, &expandtab
+  AssertEqual 2, &tabstop
+
+Execute (general-level-1.indentc):
+  tabnew tests/fixtures/general-level-1.indentc
+  DetectIndent
+  AssertEqual 0, &expandtab
+  AssertEqual 8, &tabstop
+
+Execute (haml-action_view.haml):
+  tabnew tests/fixtures/haml-action_view.haml
+  DetectIndent
+  AssertEqual 1, &expandtab
+  AssertEqual 2, &tabstop
+
+Execute (haml-render_layout.haml):
+  tabnew tests/fixtures/haml-render_layout.haml
+  DetectIndent
+  AssertEqual 1, &expandtab
+  AssertEqual 2, &tabstop
+
+Execute (jSnake-demo.html):
+  tabnew tests/fixtures/jSnake-demo.html
+  DetectIndent
+  AssertEqual 1, &expandtab
+  AssertEqual 2, &tabstop
+
+Execute (jSnake-snake3.js):
+  tabnew tests/fixtures/jSnake-snake3.js
+  DetectIndent
+  AssertEqual 1, &expandtab
+  AssertEqual 2, &tabstop
+
+Execute (parslet-scope.rb):
+  tabnew tests/fixtures/parslet-scope.rb
+  DetectIndent
+  AssertEqual 1, &expandtab
+  AssertEqual 2, &tabstop
+
+Execute (semver.md – no indentation at all):
+  tabnew tests/fixtures/semver.md
+  DetectIndent
+  AssertEqual 0, &expandtab
+  AssertEqual 8, &tabstop
+
+Execute (starbuzz_beverage_cost_calculator-core.clj):
+  tabnew tests/fixtures/starbuzz_beverage_cost_calculator-core.clj
+  DetectIndent
+  AssertEqual 1, &expandtab
+  AssertEqual 2, &tabstop
