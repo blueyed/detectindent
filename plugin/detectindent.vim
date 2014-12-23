@@ -46,16 +46,15 @@ fun! <SID>HasHTMLStyleComments()
     return index(l:html_style_comment_filetypes, &ft) != -1
 endfun
 
-fun! <SID>IsCommentStart(line)
-    " &comments aren't reliable
+fun! <SID>IsStartOfUnreliableComment(line)
     return (<SID>HasCStyleComments() && a:line =~ '/\*') || (<SID>HasHTMLStyleComments() && a:line =~ '<!--')
 endfun
 
-fun! <SID>IsCommentEnd(line)
+fun! <SID>IsEndOfUnreliableComment(line)
     return (<SID>HasCStyleComments() && a:line =~ '\*/') || (<SID>HasHTMLStyleComments() && a:line =~ '-->')
 endfun
 
-fun! <SID>IsCommentLine(line)
+fun! <SID>IsUnreliableLineComment(line)
     return <SID>HasCStyleComments() && a:line =~ '^\s\+//'
 endfun
 
@@ -136,19 +135,18 @@ fun! <SID>DetectIndent()
     while l:idx <= l:idx_end && l:idx <= l:max_lines
         let l:line = getline(l:idx)
 
-        " try to skip over comment blocks; they can give really screwy indent
-        " settings in C/C++ files especially
-        if <SID>IsCommentStart(l:line)
-            while l:idx <= l:idx_end && !<SID>IsCommentEnd(l:line)
+        " Skip past comment blocks and comment lines if we suspect that they
+        " might be unusually indented and thus would give really screwy indent
+        " settings.
+        if <SID>IsStartOfUnreliableComment(l:line)
+            while l:idx <= l:idx_end && !<SID>IsEndOfUnreliableComment(l:line)
                 let l:idx += 1
                 let l:line = getline(l:idx)
             endwhile
             let l:idx += 1
             continue
         endif
-
-        " Skip comment lines since they are not dependable.
-        if <SID>IsCommentLine(l:line)
+        if <SID>IsUnreliableLineComment(l:line)
             let l:idx += 1
             continue
         endif
@@ -178,7 +176,6 @@ fun! <SID>DetectIndent()
         endif
 
         let l:idx += 1
-
     endwhile
 
     " TODO convert the following two 'sections' into actual functions
