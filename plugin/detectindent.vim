@@ -202,15 +202,13 @@ fun! <SID>DetectIndent()
     else
         let l:verbose_msg = "Cannot determine indent. Using default to indent."
         if exists("g:detectindent_preferred_indent") &&
-            \ exists("g:detectindent_preferred_expandtab") &&
-            \ g:detectindent_preferred_expandtab
+            \ get(g:, "detectindent_preferred_expandtab")
             setlocal expandtab
             call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
         elseif exists("g:detectindent_preferred_indent")
             setlocal noexpandtab
             call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
-        elseif exists("g:detectindent_preferred_expandtab") &&
-            \ g:detectindent_preferred_expandtab
+        elseif get(g:, "detectindent_preferred_expandtab")
             setlocal expandtab
         else
             setlocal noexpandtab
