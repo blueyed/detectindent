@@ -104,6 +104,16 @@ fun! <SID>SetLocalIndentWidth(num_spaces)
     let &l:tabstop = a:num_spaces
 endfun
 
+" use default setting in option or current setting
+fun! <SID>SetDefaultLocalIndentWidth()
+    if exists("g:detectindent_preferred_indent")
+        call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
+    else
+        " do nothing; keep the existing values of the options set by
+        " SetLocalIndentWidth()
+    endif
+endfun
+
 fun! <SID>DetectIndent()
     let l:leading_tab_count           = 0
     let l:leading_space_count         = 0
@@ -171,49 +181,54 @@ fun! <SID>DetectIndent()
 
     endwhile
 
+    " TODO convert the following two 'sections' into actual functions
+
+    " expandtab setting section
     if l:leading_tab_count > l:leading_space_count
         let l:verbose_msg = "Using tabs to indent."
         setlocal noexpandtab
-        if exists("g:detectindent_preferred_indent")
-            call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
-        endif
-
     elseif l:leading_space_count > l:leading_tab_count
+        let l:verbose_msg = "Using spaces to indent."
+        setlocal expandtab
+    else
+        let l:verbose_msg = "Cannot determine indent. Using default to indent."
+        " use default setting in option or current setting
+        if exists("g:detectindent_preferred_expandtab")
+            " FIXME this may be redundant compared to using already-set
+            " option; plugin doesn't need this option
+            " That is, as long as it's possible to read global-scope option
+            " value from this script, not just the local-scope value
+            let &expandtab = g:detectindent_preferred_expandtab
+        endif
+    endif
+
+    " indent width setting section
+    if l:leading_space_count > 0
         " I think absolutely no one uses 1 space indents
         call filter(l:leading_space_dict, 'v:key > 1')
         " Filter out those tab stops which occurred in < 10% of the lines
         call filter(l:leading_space_dict, '100.0 * v:val / l:leading_space_count >= 10.0')
 
-        let l:remaining_indent_widths = keys(l:leading_space_dict)
-        let l:leading_spaces_gcd = <SID>GCDOfMany(l:remaining_indent_widths)
+        if len(l:leading_space_dict) > 0
+            let l:remaining_indent_widths = keys(l:leading_space_dict)
+            let l:leading_spaces_gcd = <SID>GCDOfMany(l:remaining_indent_widths)
 
-        if l:leading_spaces_gcd != 0
-            let l:verbose_msg = "Using spaces to indent."
-            setlocal expandtab
-            call <SID>SetLocalIndentWidth(l:leading_spaces_gcd)
-        endif
+            if l:leading_spaces_gcd != 0
+                call <SID>SetLocalIndentWidth(l:leading_spaces_gcd)
+            endif
 
-        if exists("g:detectindent_min_indent")
-            call <SID>SetLocalIndentWidth(max([g:detectindent_min_indent, &l:shiftwidth]))
-        endif
-        if exists("g:detectindent_max_indent")
-            call <SID>SetLocalIndentWidth(min([g:detectindent_max_indent, &l:shiftwidth]))
+            " TODO make below a separate function RestrictIndentWidthWithinOptionRange
+            if exists("g:detectindent_min_indent")
+                call <SID>SetLocalIndentWidth(max([g:detectindent_min_indent, &l:shiftwidth]))
+            endif
+            if exists("g:detectindent_max_indent")
+                call <SID>SetLocalIndentWidth(min([g:detectindent_max_indent, &l:shiftwidth]))
+            endif
+        else
+            call <SID>SetDefaultLocalIndentWidth()
         endif
     else
-        let l:verbose_msg = "Cannot determine indent. Using default to indent."
-        if exists("g:detectindent_preferred_indent") &&
-            \ get(g:, "detectindent_preferred_expandtab")
-            setlocal expandtab
-            call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
-        elseif exists("g:detectindent_preferred_indent")
-            setlocal noexpandtab
-            call <SID>SetLocalIndentWidth(g:detectindent_preferred_indent)
-        elseif get(g:, "detectindent_preferred_expandtab")
-            setlocal expandtab
-        else
-            setlocal noexpandtab
-        endif
-
+        call <SID>SetDefaultLocalIndentWidth()
     endif
 
     if &verbose >= g:detectindent_verbosity
