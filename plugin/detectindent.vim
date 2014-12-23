@@ -59,15 +59,27 @@ fun! <SID>IsCommentLine(line)
     return <SID>HasCStyleComments() && a:line =~ '^\s\+//'
 endfun
 
-fun! <SID>GCD(x, y)
-    let l:a = a:x
-    let l:b = a:y
+fun! <SID>GCD(a, b)
+    let l:a = a:a
+    let l:b = a:b
     while l:b > 0
         let l:temp = l:b
         let l:b = l:a % l:b
         let l:a = l:temp
     endwhile
     return l:a
+endfun
+
+fun! <SID>GCDOfMany(numbers_list)
+    let l:gcd = 0
+    for item in a:numbers_list
+        if l:gcd == 0
+            let l:gcd = item
+        else
+            let l:gcd = <SID>GCD(item, l:gcd)
+        endif
+    endfor
+    return l:gcd
 endfun
 
 fun! <SID>SetLocalIndentWidth(num_spaces)
@@ -148,9 +160,9 @@ fun! <SID>DetectIndent()
             " tab.
             if -1 == match(l:line, '^ \+\t')
                 let l:leading_space_count += 1
-                let l:spaces = strlen(matchstr(l:line, '^ \+'))
-                let l:leading_space_dict[l:spaces] =
-                    \ get(l:leading_space_dict, l:spaces, 0) + 1
+                let l:num_spaces = strlen(matchstr(l:line, '^ \+'))
+                let l:leading_space_dict[l:num_spaces] =
+                    \ get(l:leading_space_dict, l:num_spaces, 0) + 1
             endif
 
         endif
@@ -172,15 +184,8 @@ fun! <SID>DetectIndent()
         " Filter out those tab stops which occurred in < 10% of the lines
         call filter(l:leading_space_dict, '100.0 * v:val / l:leading_space_count >= 10.0')
 
-        " Find the greatest common divisor of the remaining tab stop lengths
-        let l:leading_spaces_gcd = 0
-        for length in keys(l:leading_space_dict)
-            if l:leading_spaces_gcd == 0
-                let l:leading_spaces_gcd = length
-            else
-                let l:leading_spaces_gcd = <SID>GCD(length, l:leading_spaces_gcd)
-            endif
-        endfor
+        let l:remaining_indent_widths = keys(l:leading_space_dict)
+        let l:leading_spaces_gcd = <SID>GCDOfMany(l:remaining_indent_widths)
 
         if l:leading_spaces_gcd != 0
             let l:verbose_msg = "Using spaces to indent."
