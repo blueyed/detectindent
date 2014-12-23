@@ -11,7 +11,7 @@ This script provides a command which will attempt to guess the correct indent se
 May also be used in an autocommand. For example, you might want to put this in your `vimrc`:
 
     augroup DetectIndent
-       au!
+       autocmd!
        autocmd BufReadPost *  DetectIndent
     augroup END
 
