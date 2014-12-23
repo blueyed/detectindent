@@ -32,7 +32,7 @@ if exists("loaded_detectindent")
 endif
 let loaded_detectindent = 1
 
-if !exists('g:detectindent_verbosity')
+if !exists("g:detectindent_verbosity")
     let g:detectindent_verbosity = 1
 endif
 
