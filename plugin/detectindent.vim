@@ -188,7 +188,7 @@ fun! <SID>DetectIndent()
         let l:verbose_msg = "Using spaces to indent."
         setlocal expandtab
     else
-        let l:verbose_msg = "Cannot determine indent. Using default to indent."
+        let l:verbose_msg = "Cannot determine whether indentation uses spaces or tabs. Using default."
         " use default setting in option or current setting
         if exists("g:detectindent_preferred_expandtab")
             " FIXME this may be redundant compared to using already-set
