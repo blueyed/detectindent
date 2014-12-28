@@ -209,17 +209,18 @@ fun! <SID>DetectIndent()
         if len(l:leading_space_dict) > 0
             let l:remaining_indent_widths = keys(l:leading_space_dict)
             let l:leading_spaces_gcd = <SID>GCDOfMany(l:remaining_indent_widths)
+            let l:indent_width = l:leading_spaces_gcd
 
             if l:leading_spaces_gcd != 0
-                call <SID>SetLocalIndentWidth(l:leading_spaces_gcd)
+                call <SID>SetLocalIndentWidth(l:indent_width)
             endif
 
             " TODO make below a separate function RestrictIndentWidthWithinOptionRange
             if exists("g:detectindent_min_indent")
-                call <SID>SetLocalIndentWidth(max([g:detectindent_min_indent, &l:shiftwidth]))
+                call <SID>SetLocalIndentWidth(max([g:detectindent_min_indent, l:indent_width]))
             endif
             if exists("g:detectindent_max_indent")
-                call <SID>SetLocalIndentWidth(min([g:detectindent_max_indent, &l:shiftwidth]))
+                call <SID>SetLocalIndentWidth(min([g:detectindent_max_indent, l:indent_width]))
             endif
         else
             call <SID>SetDefaultLocalIndentWidth()
