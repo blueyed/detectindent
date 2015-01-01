@@ -248,7 +248,7 @@ fun! <SID>DetectIndent()
             end
         endfor
         if len(changed_msg)
-            echom "Initial buffer settings changed:" join(changed_msg, ", ")
+            echom "Changes from the buffer’s initial settings:" join(changed_msg, ", ")
         endif
     endif
 endfun
