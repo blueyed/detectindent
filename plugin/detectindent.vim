@@ -133,9 +133,9 @@ fun! <SID>DetectIndent()
     endif
 
     let verbose_msg = ''
-    if !exists("b:detectindent_cursettings")
+    if !exists("b:detectindent_original_buffer_settings")
         " remember initial values for comparison
-        let b:detectindent_cursettings =
+        let b:detectindent_original_buffer_settings =
             \ {'expandtab': &et, 'shiftwidth': &sw, 'tabstop': &ts, 'softtabstop': &sts}
     endif
 
@@ -241,7 +241,7 @@ fun! <SID>DetectIndent()
             \ .", leading_space_dict:" string(l:leading_space_dict)
 
         let changed_msg = []
-        for [setting, oldval] in items(b:detectindent_cursettings)
+        for [setting, oldval] in items(b:detectindent_original_buffer_settings)
             exec 'let newval = &'.setting
             if oldval != newval
                 let changed_msg += [ setting." changed from ".oldval." to ".newval ]
