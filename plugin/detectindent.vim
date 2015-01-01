@@ -187,7 +187,7 @@ fun! <SID>DetectIndent()
         let l:idx += 1
     endwhile
 
-    " TODO convert the following two 'sections' into actual functions
+    " TODO convert the following three 'sections' into actual functions
 
     " expandtab setting section
     if l:leading_tab_count > l:leading_space_count
@@ -232,6 +232,7 @@ fun! <SID>DetectIndent()
         call <SID>SetDefaultLocalIndentWidth()
     endif
 
+	" verbose message outputting section
     if &verbose >= g:detectindent_verbosity
         echom l:verbose_msg
             \ ."  leading_tab_count:" l:leading_tab_count
