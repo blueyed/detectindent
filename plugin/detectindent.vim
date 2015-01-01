@@ -113,6 +113,15 @@ fun! <SID>SetDefaultLocalIndentWidth()
     endif
 endfun
 
+fun! <SID>RestrictIndentWidthWithinOptionRange(current_indent_width)
+	if exists("g:detectindent_min_indent")
+		call <SID>SetLocalIndentWidth(max([g:detectindent_min_indent, a:current_indent_width]))
+	endif
+	if exists("g:detectindent_max_indent")
+		call <SID>SetLocalIndentWidth(min([g:detectindent_max_indent, a:current_indent_width]))
+	endif
+endfun
+
 fun! <SID>DetectIndent()
     let l:leading_tab_count           = 0
     let l:leading_space_count         = 0
@@ -215,13 +224,7 @@ fun! <SID>DetectIndent()
                 call <SID>SetLocalIndentWidth(l:indent_width)
             endif
 
-            " TODO make below a separate function RestrictIndentWidthWithinOptionRange
-            if exists("g:detectindent_min_indent")
-                call <SID>SetLocalIndentWidth(max([g:detectindent_min_indent, l:indent_width]))
-            endif
-            if exists("g:detectindent_max_indent")
-                call <SID>SetLocalIndentWidth(min([g:detectindent_max_indent, l:indent_width]))
-            endif
+			call <SID>RestrictIndentWidthWithinOptionRange(l:indent_width)
         else
             call <SID>SetDefaultLocalIndentWidth()
         endif
