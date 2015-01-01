@@ -46,7 +46,7 @@ My fork’s additions to Raymond’s fork:
 * set 0 for `shiftwidth` and -1 for `softtabstop` when Vim supports it, to make it easier for users to manually change indentation
 * treat a `g:detectindent_preferred_expandtab` option 0 value as signifying a desired default of `noexpandtab`
 * gracefully exit on old Vim versions known to not work (< 7.0)
-* slightly better wording of verbose log messages
+* better wording of verbose log messages
 * various refactorings
 * style and formatting fixes in code and documentation
 
