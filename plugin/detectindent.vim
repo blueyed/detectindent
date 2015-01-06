@@ -255,6 +255,9 @@ endfun
 
 command! -bar -nargs=0 DetectIndent call <SID>DetectIndent()
 
+" TODO document the below option `g:detectindent_autodetect`
+" first read its justification in commit eae149bb and confirm that it really is necessary;
+"  if it is unnecessary, delete it
 if get(g:, "detectindent_autodetect")
     augroup DetectIndent
         autocmd!
