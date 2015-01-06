@@ -58,6 +58,10 @@ fun! <SID>IsUnreliableLineComment(line)
     return <SID>HasCStyleComments() && a:line =~ '^\s\+//'
 endfun
 
+fun! <SID>ContainsOnlyWhitespace(text)
+    return a:text !~ '\S'
+endfun
+
 fun! <SID>GCD(a, b)
     let l:a = a:a
     let l:b = a:b
@@ -162,7 +166,7 @@ fun! <SID>DetectIndent()
 
         " Skip lines that are solely whitespace, since they're less likely to
         " be properly constructed.
-        if l:line !~ '\S'
+        if <SID>ContainsOnlyWhitespace(l:line)
             let l:idx += 1
             continue
         endif
