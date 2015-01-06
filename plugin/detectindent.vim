@@ -38,12 +38,12 @@ endif
 
 fun! <SID>HasCStyleComments()
     let l:c_style_comment_filetypes = ["arduino", "c", "cpp", "h", "java", "javascript", "php"]
-    return index(l:c_style_comment_filetypes, &ft) != -1
+    return index(l:c_style_comment_filetypes, &filetype) != -1
 endfun
 
 fun! <SID>HasHTMLStyleComments()
     let l:html_style_comment_filetypes = ["html", "xml"]
-    return index(l:html_style_comment_filetypes, &ft) != -1
+    return index(l:html_style_comment_filetypes, &filetype) != -1
 endfun
 
 fun! <SID>IsStartOfUnreliableComment(line)
