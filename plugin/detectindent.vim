@@ -202,9 +202,8 @@ fun! <SID>DetectIndent()
         if exists("g:detectindent_preferred_expandtab")
             " FIXME this may be redundant compared to using already-set
             " option; plugin doesn't need this option
-            " That is, as long as it's possible to read global-scope option
-            " value from this script, not just the local-scope value
-            let &expandtab = g:detectindent_preferred_expandtab
+            " One can read the global-scope option value with &g:expandtab
+            let &l:expandtab = g:detectindent_preferred_expandtab
         endif
     endif
 
