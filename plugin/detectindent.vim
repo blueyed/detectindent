@@ -86,25 +86,23 @@ fun! <SID>GCDOfMany(numbers_list)
 endfun
 
 fun! <SID>SetLocalIndentWidth(num_spaces)
-    " when supported, use values that automatically sync with each other
-    " so that the user doesn't have to change multiple options if they
-    " manually change the value of tabstop
+    let &l:tabstop = a:num_spaces
 
+    " For 'softtabstop', use the value -1 to automatically sync with
+    " 'shiftwidth', for convenience if the user manually changes 'shiftwidth'.
     try
-        " make 'shiftwidth' use the value of 'tabstop'
-        let &l:shiftwidth = 0
-    catch /^Vim\%((\a\+)\)\=:E487/ " the value 0 was not supported before Vim 7.4
-        let &l:shiftwidth = a:num_spaces
-    endtry
-
-    try
-        " make 'softtabstop' use the value of 'shiftwidth'
         let &l:softtabstop = -1
     catch /^Vim\%((\a\+)\)\=:E487/ " the value -1 was not supported before Vim 7.4
         let &l:softtabstop = a:num_spaces
     endtry
 
-    let &l:tabstop = a:num_spaces
+    " 'shiftwidth' supports using the value 0 to sync with 'tabstop', which
+    " would be convenient if the user manually changes 'tabstop'. But I don't
+    " use that value here, because it breaks indenting in many languages.
+    " This is because many language-specific indenting plugins, including ones
+    " bundled with Vim, have not yet upgraded to use shiftwidth() instead of
+    " 'shiftwidth'.
+    let &l:shiftwidth = a:num_spaces
 endfun
 
 " use default setting in option or current setting
