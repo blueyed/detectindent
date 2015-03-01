@@ -16,14 +16,10 @@ You should see output like the following:
     
     [… a bunch of details about the version of Vim the tests are being run with …]
     
-    Starting Vader: 3 suite(s), 17 case(s)
+    Starting Vader: 2 suite(s), 15 case(s)
       Starting Vader: /Users/roryokane/.vim/bundle/detectindent/tests/all-options-are-set.vader
         (1/2) [EXECUTE] reset indent options to initial values
         (2/2) [EXECUTE] check that all four options are changed to a correct value
-      Success/Total: 2/2
-      Starting Vader: /Users/roryokane/.vim/bundle/detectindent/tests/config-options-are-respected.vader
-        (1/2) [EXECUTE] reset indent options to initial values
-        (2/2) [EXECUTE] TODO g:detectindent_preferred_expandtab is respected
       Success/Total: 2/2
       Starting Vader: /Users/roryokane/.vim/bundle/detectindent/tests/fixtures-detected-correctly.vader
         ( 1/13) [EXECUTE] reset indent options to initial values
@@ -40,12 +36,11 @@ You should see output like the following:
         (10/13) [EXECUTE] jSnake-snake3.js
         (11/13) [EXECUTE] parslet-scope.rb
         (12/13) [EXECUTE] semver.md – no indentation at all
-        (12/13) [EXECUTE] (X) 1 should be equal to 0
         (13/13) [EXECUTE] starbuzz_beverage_cost_calculator-core.clj
         (13/13) [EXECUTE] (X) 1 should be equal to 2
-      Success/Total: 9/13
-    Success/Total: 13/17 (assertions: 23/27)
-    Elapsed time: 1.089934 sec.
+      Success/Total: 10/13
+    Success/Total: 12/15 (assertions: 25/28)
+    Elapsed time: 1.910852 sec.
 
 That’s right, not all of the tests currently pass. Some edge cases, such as Lisp-like indentation, are currently detected wrong. I figured it was better to put them in the tests so I can at least know about them, and test whether they are fixed later when I improve the algorithm.
 
