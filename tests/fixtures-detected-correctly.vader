@@ -2,7 +2,7 @@ Execute (reset indent options to initial values):
   " so it is clear what values later tests are working with
   setglobal noexpandtab tabstop=8 softtabstop=0 shiftwidth=8
 
-" Compatibility warning: these tests inspect `shiftwidth()`. If you get errors because your Vim is too old to have `shiftwidth()`, replace them locally with `&tabstop`. I use `shiftwidth()` instead of `&tabstop` so that I can easily use these tests with older versions of DetectIndent that set shiftwidth directly instead of through tabstop.
+" Compatibility warning: these tests inspect `shiftwidth()`. If you get errors because your Vim is too old to have `shiftwidth()`, replace them locally with `&shiftwidth`. I use `shiftwidth()` instead of `&shiftwidth` to support possible future usage of the 0 value for 'shiftwidth', and to make the writers of language indent plugins aware of the need to migrate from checking `&sw` to checking `shiftwidth()`.
 
 After:
   " close the file that was just tested and its tab, and forget about it
