@@ -9,10 +9,6 @@
 "
 " Usage:         :DetectIndent
 "
-"                " to prefer expandtab to noexpandtab when detection is
-"                " impossible:
-"                :let g:detectindent_preferred_expandtab = 1
-"
 "                " to set a preferred indent level when detection is
 "                " impossible:
 "                :let g:detectindent_preferred_indent = 4
@@ -199,14 +195,9 @@ fun! <SID>DetectIndent()
         let l:verbose_msg = "Using spaces to indent."
         setlocal expandtab
     else
-        let l:verbose_msg = "Cannot determine whether indentation uses spaces or tabs. Using default."
-        " use default setting in option or current setting
-        if exists("g:detectindent_preferred_expandtab")
-            " FIXME this may be redundant compared to using already-set
-            " option; plugin doesn't need this option
-            " One can read the global-scope option value with &g:expandtab
-            let &l:expandtab = g:detectindent_preferred_expandtab
-        endif
+        let l:verbose_msg = "Cannot determine whether indentation uses spaces or tabs; leaving the setting at the default."
+        " since the program does not change the local value of expandtab (&l:expandtab),
+        " it will automatically mirror the global value (&g:expandtab)
     endif
 
     " indent width setting section

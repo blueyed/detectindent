@@ -44,7 +44,7 @@ My fork’s additions to Raymond’s fork:
 * require only a majority, not an entirety, of lines to use tabs for tabs to be selected
 * detect the indent width when tabs are detected, not only when spaces are detected
 * set -1 for `softtabstop` when Vim supports it, to make it easier for users to manually change indentation
-* treat a `g:detectindent_preferred_expandtab` option 0 value as signifying a desired default of `noexpandtab`
+* remove the option `g:detectindent_preferred_expandtab`, which is redundant with the global setting `&g:expandtab`
 * gracefully exit on old Vim versions known to not work (< 7.0)
 * better wording of verbose log messages
 * various refactorings
