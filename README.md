@@ -2,7 +2,14 @@
 
 *A [Vim](http://www.vim.org/) plugin for automatically detecting indent settings*
 
-This script provides a command which will attempt to guess the correct indent settings for an open file, for use when there is no modeline available. Note that this is a pure Vim implementation, and doesn’t require any external applications or interpreters.
+This script provides a command which will attempt to guess the correct indent settings for an open file, for use when there is no modeline available. Specifically, the command sets the following buffer-local options for you:
+
+* [`'expandtab'`](http://vimdoc.sourceforge.net/htmldoc/options.html#%27expandtab%27) (tabs vs. spaces)
+* [`'shiftwidth'`](http://vimdoc.sourceforge.net/htmldoc/options.html#%27shiftwidth%27) (width of indentation)
+* [`'tabstop'`](http://vimdoc.sourceforge.net/htmldoc/options.html#%27tabstop%27) (width of a tab character)
+* [`'softtabstop'`](http://vimdoc.sourceforge.net/htmldoc/options.html#%27softtabstop%27) (number of spaces that <kbd>Tab</kbd> inserts)
+
+Note that this is a pure Vim implementation, and doesn’t require any external applications or interpreters.
 
 ## Usage
 
