@@ -112,12 +112,17 @@ fun! <SID>SetDefaultLocalIndentWidth()
 endfun
 
 fun! <SID>RestrictIndentWidthWithinOptionRange(current_indent_width)
-	if exists("g:detectindent_min_indent")
-		call <SID>SetLocalIndentWidth(max([g:detectindent_min_indent, a:current_indent_width]))
-	endif
-	if exists("g:detectindent_max_indent")
-		call <SID>SetLocalIndentWidth(min([g:detectindent_max_indent, a:current_indent_width]))
-	endif
+    let l:new_indent_width = a:current_indent_width
+    if exists("g:detectindent_min_indent")
+        let l:new_indent_width = max([g:detectindent_min_indent, l:new_indent_width])
+    endif
+    if exists("g:detectindent_max_indent")
+        let l:new_indent_width = min([g:detectindent_max_indent, l:new_indent_width])
+    endif
+    
+    if l:new_indent_width != a:current_indent_width
+        call <SID>SetLocalIndentWidth(l:new_indent_width)
+    endif
 endfun
 
 fun! <SID>DetectIndent()

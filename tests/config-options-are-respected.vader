@@ -54,3 +54,14 @@ Execute (g:detectindent_max_indent is ignored in favor of global options for pur
   unlet g:detectindent_max_indent
 
 " I won’t bother to do a permutation with g:detectindent_min_indent and tab indentation
+
+Execute (g:detect_min_indent and max_indent, when combined, override too-low detected indentation):
+  let g:detectindent_min_indent = 3
+  let g:detectindent_max_indent = 4
+  tabnew tests/fixtures/jSnake-demo.html
+  DetectIndent
+  " shiftwidth is 2 without the two options; expect min_indent to be the deciding factor
+  AssertEqual 3, shiftwidth()
+  unlet g:detectindent_min_indent
+  unlet g:detectindent_max_indent
+  bdelete
