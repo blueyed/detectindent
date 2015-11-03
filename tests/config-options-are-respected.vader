@@ -36,7 +36,15 @@ Execute (g:detectindent_max_indent is respected for space indentation):
   unlet g:detectindent_max_indent
 
 Execute (g:detectindent_max_indent is respected for mixed-space-and-tab indentation with a tab majority):
-  " TODO find a suitable test file, then write the test for it in the standard format
+  let g:detectindent_max_indent = 6
+  tabnew tests/fixtures/vared.fish
+  DetectIndent
+  " expect no change in expandtab
+  AssertEqual 0, &expandtab
+  " shiftwidth should be 8 (though is currently 40) without the option; expect a difference
+  AssertEqual 6, shiftwidth()
+  bdelete
+  unlet g:detectindent_max_indent
 
 Execute (g:detectindent_max_indent is ignored in favor of global options for pure-tab indentation):
   " TODO decide whether this behavior is desirable
