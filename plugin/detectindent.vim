@@ -221,7 +221,7 @@ fun! <SID>DetectIndent()
                 call <SID>SetLocalIndentWidth(l:indent_width)
             endif
 
-			call <SID>RestrictIndentWidthWithinOptionRange(l:indent_width)
+            call <SID>RestrictIndentWidthWithinOptionRange(l:indent_width)
         else
             call <SID>SetDefaultLocalIndentWidth()
         endif
@@ -229,7 +229,7 @@ fun! <SID>DetectIndent()
         call <SID>SetDefaultLocalIndentWidth()
     endif
 
-	" verbose message outputting section
+    " verbose message outputting section
     if &verbose >= g:detectindent_verbosity
         echom l:verbose_msg
             \ ."  leading_tab_count:" l:leading_tab_count
