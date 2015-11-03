@@ -79,3 +79,9 @@ Execute (starbuzz_beverage_cost_calculator-core.clj):
   DetectIndent
   AssertEqual 1, &expandtab
   AssertEqual 2, shiftwidth()
+
+Execute (vared.fish):
+  tabnew tests/fixtures/vared.fish
+  DetectIndent
+  AssertEqual 0, &expandtab
+  AssertEqual 8, shiftwidth()
