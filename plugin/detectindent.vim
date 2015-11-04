@@ -119,18 +119,18 @@ fun! <SID>RestrictIndentWidthWithinOptionRange(current_indent_width)
     if exists("g:detectindent_max_indent")
         let l:new_indent_width = min([g:detectindent_max_indent, l:new_indent_width])
     endif
-    
+
     if l:new_indent_width != a:current_indent_width
         call <SID>SetLocalIndentWidth(l:new_indent_width)
     endif
 endfun
 
 fun! <SID>DetectIndent()
-    let l:leading_tab_count           = 0
-    let l:leading_space_count         = 0
-    let l:leading_space_dict          = {}
-    let l:leading_spaces_gcd          = 0
-    let l:max_lines                   = 1024
+    let l:leading_tab_count   = 0
+    let l:leading_space_count = 0
+    let l:leading_space_dict  = {}
+    let l:leading_spaces_gcd  = 0
+    let l:max_lines           = 1024
     if exists("g:detectindent_max_lines_to_analyse")
         let l:max_lines = g:detectindent_max_lines_to_analyse
     endif
