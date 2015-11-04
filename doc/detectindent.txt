@@ -43,6 +43,12 @@ Author:  Ciaran McCreesh <ciaran.mccreesh at googlemail.com>
 ==============================================================================
 3. DetectIndent ChangeLog                             *detectindent-changelog*
 
+        v?
+            * Written records were not kept after the first release. However,
+              the history of changes can be understood by reading the version
+              control history of this Git repository. Also, README.md’s
+              “About this fork” section lists the changes since the project
+              was forked.
         v1.0 (20050105)
             * initial release after discussion on irc.freenode.net:#vim
 
