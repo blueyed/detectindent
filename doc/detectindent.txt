@@ -1,6 +1,7 @@
 *detectindent.txt*        The Detect Indent Plugin             1.0, Jan 04, 2005
 
-Author:  Ciaran McCreesh <ciaran.mccreesh at googlemail.com>
+Authors:  Ciaran McCreesh <ciaran.mccreesh at googlemail.com>,
+          Rory O’Kane <rory@roryokane.com>
 
 ==============================================================================
 1. Contents                             *detectindent* *detectindent-contents*

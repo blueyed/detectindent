@@ -1,7 +1,8 @@
 " Name:          detectindent (global plugin)
-" Version:       1.0
-" Author:        Ciaran McCreesh <ciaran.mccreesh at googlemail.com>
-" Updates:       http://github.com/ciaranm/detectindent
+" Version:       1.? (no explicit versions)
+" Author:        Ciaran McCreesh <ciaran.mccreesh at googlemail.com>,
+"                Rory O’Kane <rory@roryokane.com>, and others
+" Updates:       http://github.com/roryokane/detectindent
 " Purpose:       Detect file indent settings
 "
 " License:       You may redistribute this plugin under the same terms as Vim
