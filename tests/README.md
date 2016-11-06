@@ -2,11 +2,12 @@ This folder, `tests`, contains the executable tests for DetectIndent.
 
 ## Running the tests
 
-As a prerequisite, the [Vader](https://github.com/junegunn/vader.vim) testing plugin must be installed.
+You can execute `make test` in the plugin folder (*not* this `tests` folder).
 
-To run the tests, `cd` so your working is the root folder `detectindent`, *not* this `tests` folder. Then run the following:
+    $ make test
 
-    $ tests/run-all-tests
+This will install [Vader](https://github.com/junegunn/vader.vim) automatically,
+and then runs the test.
 
 You should see output like the following:
 

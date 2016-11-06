@@ -1,6 +1,7 @@
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vader.vim
+set rtp+=build/vader.vim
 set rtp+=.
 set rtp+=./after
 filetype plugin indent on

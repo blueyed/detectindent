@@ -8,16 +8,22 @@ After:
   " close the file that was just tested and its tab, and forget about it
   bdelete
 
-Execute (Coursera-The_Hardware-Software_Interface-lab1-bits.c):
+Execute (Coursera-The_Hardware-Software_Interface-lab1-bits.c: expandtab):
   tabnew tests/fixtures/Coursera-The_Hardware-Software_Interface-lab1-bits.c
   DetectIndent
   AssertEqual 1, &expandtab
+Execute (TODO: Coursera-The_Hardware-Software_Interface-lab1-bits.c: shiftwidth):
+  tabnew tests/fixtures/Coursera-The_Hardware-Software_Interface-lab1-bits.c
+  DetectIndent
   AssertEqual 2, shiftwidth()
 
-Execute (FountainMusic-FMDisplayItem.c):
+Execute (FountainMusic-FMDisplayItem.c: expandtab):
   tabnew tests/fixtures/FountainMusic-FMDisplayItem.c
   DetectIndent
   AssertEqual 0, &expandtab
+Execute (TODO: FountainMusic-FMDisplayItem.c: shiftwidth):
+  tabnew tests/fixtures/FountainMusic-FMDisplayItem.c
+  DetectIndent
   AssertEqual 8, shiftwidth()
 
 Execute (FountainMusic-FMDisplayItem.h):
@@ -68,20 +74,29 @@ Execute (parslet-scope.rb):
   AssertEqual 1, &expandtab
   AssertEqual 2, shiftwidth()
 
-Execute (semver.md – no indentation at all):
+Execute (TODO: semver.md – no indentation at all: expandtab):
   tabnew tests/fixtures/semver.md
   DetectIndent
   AssertEqual 0, &expandtab
+Execute (TODO: semver.md – no indentation at all: shiftwidth):
+  tabnew tests/fixtures/semver.md
+  DetectIndent
   AssertEqual 8, shiftwidth()
 
-Execute (starbuzz_beverage_cost_calculator-core.clj):
+Execute (starbuzz_beverage_cost_calculator-core.clj: expandtab):
   tabnew tests/fixtures/starbuzz_beverage_cost_calculator-core.clj
   DetectIndent
   AssertEqual 1, &expandtab
+Execute (TODO: starbuzz_beverage_cost_calculator-core.clj: shiftwidth):
+  tabnew tests/fixtures/starbuzz_beverage_cost_calculator-core.clj
+  DetectIndent
   AssertEqual 2, shiftwidth()
 
-Execute (vared.fish):
+Execute (vared.fish: expandtab):
   tabnew tests/fixtures/vared.fish
   DetectIndent
   AssertEqual 0, &expandtab
+Execute (TODO: vared.fish: shiftwidth):
+  tabnew tests/fixtures/vared.fish
+  DetectIndent
   AssertEqual 8, shiftwidth()
