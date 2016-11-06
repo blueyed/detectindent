@@ -8,6 +8,6 @@ Execute (check that all four options are changed to a correct value):
   AssertEqual 1, &expandtab
   AssertEqual 2, &tabstop
   " the values of 'sts' and 'sw' can be different depending on the values that this version of Vim supports
-  Assert &softtabstop == -1 || &softtabstop == 2, "softtabstop was not set correctly"
-  Assert &shiftwidth == 0 || &shiftwidth == 2, "shiftwidth was not set correctly"
+  Assert &softtabstop == -1 || &softtabstop == 2, "softtabstop was not set correctly: ".&sts
+  Assert &shiftwidth == 0 || &shiftwidth == 2, "shiftwidth was not set correctly: ".&sw
   bdelete
