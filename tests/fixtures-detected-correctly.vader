@@ -1,8 +1,4 @@
-Execute (reset indent options to initial values):
-  " so it is clear what values later tests are working with
-  setglobal noexpandtab tabstop=8 softtabstop=0 shiftwidth=8
-
-" Compatibility warning: these tests inspect `shiftwidth()`. If you get errors because your Vim is too old to have `shiftwidth()`, replace them locally with `&shiftwidth`. I use `shiftwidth()` instead of `&shiftwidth` to support possible future usage of the 0 value for 'shiftwidth', and to make the writers of language indent plugins aware of the need to migrate from checking `&sw` to checking `shiftwidth()`.
+Include: _setup.vader
 
 After:
   " close the file that was just tested and its tab, and forget about it
@@ -15,7 +11,7 @@ Execute (Coursera-The_Hardware-Software_Interface-lab1-bits.c: expandtab):
 Execute (TODO: Coursera-The_Hardware-Software_Interface-lab1-bits.c: shiftwidth):
   tabnew tests/fixtures/Coursera-The_Hardware-Software_Interface-lab1-bits.c
   DetectIndent
-  AssertEqual 2, shiftwidth()
+  AssertEqual 2, Shiftwidth()
 
 Execute (FountainMusic-FMDisplayItem.c: expandtab):
   tabnew tests/fixtures/FountainMusic-FMDisplayItem.c
@@ -24,55 +20,55 @@ Execute (FountainMusic-FMDisplayItem.c: expandtab):
 Execute (TODO: FountainMusic-FMDisplayItem.c: shiftwidth):
   tabnew tests/fixtures/FountainMusic-FMDisplayItem.c
   DetectIndent
-  AssertEqual 8, shiftwidth()
+  AssertEqual 8, Shiftwidth()
 
 Execute (FountainMusic-FMDisplayItem.h):
   tabnew tests/fixtures/FountainMusic-FMDisplayItem.h
   DetectIndent
   AssertEqual 0, &expandtab
-  AssertEqual 8, shiftwidth()
+  AssertEqual 8, Shiftwidth()
 
 Execute (GameOfLife.plaid – badly mixed indentation):
   tabnew tests/fixtures/GameOfLife.plaid
   DetectIndent
   AssertEqual 0, &expandtab
-  AssertEqual 2, shiftwidth()
+  AssertEqual 2, Shiftwidth()
 
 Execute (general-level-1.indentc):
   tabnew tests/fixtures/general-level-1.indentc
   DetectIndent
   AssertEqual 0, &expandtab
-  AssertEqual 8, shiftwidth()
+  AssertEqual 8, Shiftwidth()
 
 Execute (haml-action_view.haml):
   tabnew tests/fixtures/haml-action_view.haml
   DetectIndent
   AssertEqual 1, &expandtab
-  AssertEqual 2, shiftwidth()
+  AssertEqual 2, Shiftwidth()
 
 Execute (haml-render_layout.haml):
   tabnew tests/fixtures/haml-render_layout.haml
   DetectIndent
   AssertEqual 1, &expandtab
-  AssertEqual 2, shiftwidth()
+  AssertEqual 2, Shiftwidth()
 
 Execute (jSnake-demo.html):
   tabnew tests/fixtures/jSnake-demo.html
   DetectIndent
   AssertEqual 1, &expandtab
-  AssertEqual 2, shiftwidth()
+  AssertEqual 2, Shiftwidth()
 
 Execute (jSnake-snake3.js):
   tabnew tests/fixtures/jSnake-snake3.js
   DetectIndent
   AssertEqual 1, &expandtab
-  AssertEqual 2, shiftwidth()
+  AssertEqual 2, Shiftwidth()
 
 Execute (parslet-scope.rb):
   tabnew tests/fixtures/parslet-scope.rb
   DetectIndent
   AssertEqual 1, &expandtab
-  AssertEqual 2, shiftwidth()
+  AssertEqual 2, Shiftwidth()
 
 Execute (TODO: semver.md – no indentation at all: expandtab):
   tabnew tests/fixtures/semver.md
@@ -81,7 +77,7 @@ Execute (TODO: semver.md – no indentation at all: expandtab):
 Execute (TODO: semver.md – no indentation at all: shiftwidth):
   tabnew tests/fixtures/semver.md
   DetectIndent
-  AssertEqual 8, shiftwidth()
+  AssertEqual 8, Shiftwidth()
 
 Execute (starbuzz_beverage_cost_calculator-core.clj: expandtab):
   tabnew tests/fixtures/starbuzz_beverage_cost_calculator-core.clj
@@ -90,7 +86,7 @@ Execute (starbuzz_beverage_cost_calculator-core.clj: expandtab):
 Execute (TODO: starbuzz_beverage_cost_calculator-core.clj: shiftwidth):
   tabnew tests/fixtures/starbuzz_beverage_cost_calculator-core.clj
   DetectIndent
-  AssertEqual 2, shiftwidth()
+  AssertEqual 2, Shiftwidth()
 
 Execute (vared.fish: expandtab):
   tabnew tests/fixtures/vared.fish
@@ -99,4 +95,4 @@ Execute (vared.fish: expandtab):
 Execute (TODO: vared.fish: shiftwidth):
   tabnew tests/fixtures/vared.fish
   DetectIndent
-  AssertEqual 8, shiftwidth()
+  AssertEqual 8, Shiftwidth()

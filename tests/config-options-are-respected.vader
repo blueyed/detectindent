@@ -1,6 +1,4 @@
-Execute (reset indent options to initial values):
-  " so it is clear what values later tests are working with
-  setglobal noexpandtab tabstop=8 softtabstop=0 shiftwidth=8
+Include: _setup.vader
 
 Execute (g:detectindent_preferred_indent is respected):
   let g:detectindent_preferred_indent = 4
@@ -9,7 +7,7 @@ Execute (g:detectindent_preferred_indent is respected):
   " expect no change in expandtab
   AssertEqual 0, &expandtab
   " shiftwidth is 8 without the option; expect a difference
-  AssertEqual 4, shiftwidth()
+  AssertEqual 4, Shiftwidth()
   bdelete
   unlet g:detectindent_preferred_indent
 
@@ -20,7 +18,7 @@ Execute (g:detectindent_min_indent is respected for space indentation):
   " expect no change in expandtab
   AssertEqual 1, &expandtab
   " shiftwidth is 2 without the option; expect a difference
-  AssertEqual 4, shiftwidth()
+  AssertEqual 4, Shiftwidth()
   bdelete
   unlet g:detectindent_min_indent
 
@@ -31,7 +29,7 @@ Execute (g:detectindent_max_indent is respected for space indentation):
   " expect no change in expandtab
   AssertEqual 1, &expandtab
   " shiftwidth is 2 without the option; expect a difference
-  AssertEqual 1, shiftwidth()
+  AssertEqual 1, Shiftwidth()
   bdelete
   unlet g:detectindent_max_indent
 
@@ -42,7 +40,7 @@ Execute (g:detectindent_max_indent is respected for mixed-space-and-tab indentat
   " expect no change in expandtab
   AssertEqual 0, &expandtab
   " shiftwidth should be 8 (though is currently 40) without the option; expect a difference
-  AssertEqual 6, shiftwidth()
+  AssertEqual 6, Shiftwidth()
   bdelete
   unlet g:detectindent_max_indent
 
@@ -57,7 +55,7 @@ Execute (g:detectindent_max_indent is ignored in favor of global options for pur
   " expect no change in expandtab
   AssertEqual 0, &expandtab
   " expect no change in shiftwidth
-  AssertEqual 8, shiftwidth()
+  AssertEqual 8, Shiftwidth()
   bdelete
   unlet g:detectindent_max_indent
 
@@ -69,7 +67,7 @@ Execute (g:detect_min_indent and max_indent, when combined, override too-low det
   tabnew tests/fixtures/jSnake-demo.html
   DetectIndent
   " shiftwidth is 2 without the two options; expect min_indent to be the deciding factor
-  AssertEqual 3, shiftwidth()
+  AssertEqual 3, Shiftwidth()
   unlet g:detectindent_min_indent
   unlet g:detectindent_max_indent
   bdelete
